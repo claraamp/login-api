@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { User } from './user/entities/user.entity';
 import { UserModule } from './user/user.module';
 
-const entities = [];
+const entities = [User];
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -20,7 +21,7 @@ const entities = [];
       database: process.env.DB_NAME,
       entities: entities,
       synchronize: true,
-    }),
+    } as TypeOrmModuleOptions),
     UserModule,
   ],
   controllers: [AppController],
