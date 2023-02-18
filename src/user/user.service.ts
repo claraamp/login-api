@@ -11,6 +11,14 @@ export class UserService {
 
     delete user.password;
     return user;
+  };
+
+  async findByEmail(email: string) {
+    return await User.findOne({
+      where: {
+        email: email,
+      },
+    });
   }
 
 
