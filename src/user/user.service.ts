@@ -12,6 +12,16 @@ export class UserService {
     delete user.password;
     return user;
   };
+  
+  async findById(id: number) {
+    const user = await User.findOne({
+      where: {
+        id: id
+      }
+    });
+
+    return user;
+  }
 
   async findByEmail(email: string) {
     return await User.findOne({
@@ -19,7 +29,5 @@ export class UserService {
         email: email,
       },
     });
-  }
-
-
+  };
 }
